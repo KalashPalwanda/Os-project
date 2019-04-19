@@ -11,14 +11,14 @@ int t = 0;
   
 using namespace std; 
   
-// function to check if process can be allocated or not 
+
 bool p_available(int p_id, int allocated[][Re], 
                   int max[][Re], int need[][Re], int available[]) 
 { 
   //intializing boolean flag 
     bool fg = true; 
   
-    // check if all the available resources  are less greater than need of process 
+    // function for checking  the need resources  are greater than need of process 
     for (int x = 0; x < Re; x++) { 
   
         if (need[p_id][x] > available[x]) 
@@ -33,29 +33,29 @@ void sf_sequence(bool m[], int allocated[][Re], int max[][Re],
                    int need[][Re], int available[], vector<int> safe) 
 { 
   
-    for (int x = 0; x < Pr; x++) { 
+    for (int x = 0; x < Pr; x++)
+	 { 
   
-        // check if it is not marked already and can be allocated 
         if (!m[x] && p_available(x, allocated, max, need, available )){ 
   
             // mark the process 
             m[x] = true; 
   
             // increasing the available by deallocating from process x 
-            for (int j = 0; j < Re; j++) 
-                available[j] += allocated[x][j]; 
+            for (int y = 0; y< Re; y++) 
+                available[y] += allocated[x][y]; 
   
             safe.push_back(x); 
             // finding safe sequence by taking process x 
             sf_sequence(m, allocated, max, need, available, safe); 
             safe.pop_back(); 
   
-            // unmark the process 
+             
             m[x] = false; 
   
             // decrement the available resources 
-            for (int j = 0; j < Re; j++) 
-                available[j] -= allocated[x][j]; 
+            for (int y = 0; y < Re; y++) 
+                available[y] -= allocated[x][y]; 
         } 
     } 
   
@@ -74,8 +74,7 @@ void sf_sequence(bool m[], int allocated[][Re], int max[][Re],
         cout << endl; 
     } 
 } 
-  
-// main function 
+  // main function 
 int main() 
 { 
   
@@ -97,7 +96,7 @@ int main()
     // marked of size Pr for marking allocated process 
     bool m[Pr]; 
   
-    // need matrix of size Pr*R 
+    // calculating need matrix of size Pr*R 
     int need[Pr][Re]; 
     for (int x = 0; x < Pr; x++) 
   {
